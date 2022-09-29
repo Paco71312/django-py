@@ -25,4 +25,6 @@ urlpatterns = [
     #para importar templates
     path('mi-template/', views.mi_template),
     path('admin/', admin.site.urls),
+    #clase2 Agregando un parametro de nombre 
+    path('mi-template/<str:nombre>', views.tu_template),
 ]
