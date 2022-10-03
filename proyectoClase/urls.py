@@ -26,5 +26,8 @@ urlpatterns = [
     path('mi-template/', views.mi_template),
     path('admin/', admin.site.urls),
     #clase2 Agregando un parametro de nombre 
-    path('mi-template/<str:nombre>', views.tu_template),
+    path('prueba-template/', views.prueba_template),
+    path('ver_personas/', views.ver_personas),
+    path('crear_persona/<str:nombre>/<str:apellido>/', views.crear_persona),
+    
 ]

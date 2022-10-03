@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from datetime import datetime, timedelta
 #para importar tu template
 from django.template import Context,Template,loader
+import random
+
+from home.models import Persona
 def hola(request):
     return HttpResponse("Buenas clase 41765!")
 
@@ -43,4 +46,31 @@ def tu_template(request,nombre):
     template=loader.get_template('tu_template.html')
     renderizar_template=template.render({'persona':nombre})
     return HttpResponse(renderizar_template)
-#simplificando un poco el template y eso es importando loader
+#simplificando un poco el template y esoes importando loader
+
+def prueba_template(request):
+
+    #mostrar los numero del 1 al 10 
+    mi_contexto={'rango':list(range(1,11)),
+                 'valor_aleatorio':random.randrange(1,11)}
+        
+    template=loader.get_template('prueba_template.html')
+    renderizar_template=template.render(mi_contexto)
+    return HttpResponse(renderizar_template)
+# crear  la vista para el  modelo 
+def crear_persona(request,nombre,apellido):
+    persona=Persona(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_nacimiento=datetime.now())
+    persona.save()
+    template=loader.get_template('crear_persona.html')
+    renderizar_template=template.render({'persona':persona})
+    return HttpResponse(renderizar_template)
+
+
+
+def ver_personas(request):
+    # con esto se tra todos lo aobjetos de persona que tiene el modelo 
+    personas=Persona.objects.all
+    template=loader.get_template('ver_personas.html')
+    renderizar_template=template.render({'personas':personas})
+    return HttpResponse(renderizar_template)  
+    
