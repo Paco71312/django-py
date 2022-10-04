@@ -27,7 +27,7 @@ def calcular_fecha_nacimiento(request, edad):
 #importacion de templates
 def mi_template(request):
     #Clase 1: como se hacia antes 
-    cargar_archivo=open(r'C:\Users\Sistemas\Desktop\django\proyecto-clases\templates\mi_template.html', 'r')
+    cargar_archivo=open(r'C:\Users\Sistemas\Desktop\django\proyecto-clases\home\templates\home\mi_template.html', 'r')
     crear_template=Template(cargar_archivo.read())
     cargar_archivo.close
     #puesta en marcha 
@@ -46,7 +46,7 @@ def tu_template(request,nombre):
     # renderizar_template = crear_template.render(contexto) 
     
     #CON LOADER
-    template=loader.get_template('tu_template.html')
+    template=loader.get_template('home/tu_template.html')
     renderizar_template=template.render({'persona':nombre})
     return HttpResponse(renderizar_template)
 #simplificando un poco el template y esoes importando loader
@@ -57,14 +57,14 @@ def prueba_template(request):
     mi_contexto={'rango':list(range(1,11)),
                  'valor_aleatorio':random.randrange(1,11)}
         
-    template=loader.get_template('prueba_template.html')
+    template=loader.get_template('home/prueba_template.html')
     renderizar_template=template.render(mi_contexto)
     return HttpResponse(renderizar_template)
 # crear  la vista para el  modelo 
 def crear_persona(request,nombre,apellido):
     persona=Persona(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_nacimiento=datetime.now())
     persona.save()
-    return render(request,'crear_persona.html',{'persona':persona})
+    return render(request,'home/crear_persona.html',{'persona':persona})
     # template=loader.get_template('crear_persona.html')
     # renderizar_template=template.render({'persona':persona})
     # return HttpResponse(renderizar_template)
@@ -75,7 +75,7 @@ def ver_personas(request):
     # con esto se tra todos lo aobjetos de persona que tiene el modelo 
     persona=Persona.objects.all
     
-    return render(request,'ver_personas.html',{'personas':persona})
+    return render(request,'home/ver_personas.html',{'personas':persona})
     # template=loader.get_template('ver_personas.html')
     # renderizar_template=template.render({'personas':persona})
     # return HttpResponse(renderizar_template)  
