@@ -69,8 +69,8 @@ def crear_persona(request,nombre,apellido):
 
 def ver_personas(request):
     # con esto se tra todos lo aobjetos de persona que tiene el modelo 
-    personas=Persona.objects.all
+    persona=Persona.objects.all
     template=loader.get_template('ver_personas.html')
-    renderizar_template=template.render({'personas':personas})
+    renderizar_template=template.render({'personas':persona})
     return HttpResponse(renderizar_template)  
     
