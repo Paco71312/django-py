@@ -14,20 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path,include
+from home import views
 urlpatterns = [
-    path('hola/', views.hola),
-    path('otra-vista/', views.otra_vista),
-    path('fecha/', views.fecha),
-    #cuando yo quiero pasar parametros  lo pongo entre corchetes
-    path('fecha-nacimiento/<int:edad>', views.calcular_fecha_nacimiento),
-    #para importar templates
-    path('mi-template/', views.mi_template),
+   
     path('admin/', admin.site.urls),
-    #clase2 Agregando un parametro de nombre 
-    path('prueba-template/', views.prueba_template),
-    path('ver_personas/', views.ver_personas),
-    path('crear_persona/<str:nombre>/<str:apellido>/', views.crear_persona),
+    path('home/', include('home.urls')),
     
 ]
