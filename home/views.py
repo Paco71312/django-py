@@ -80,3 +80,6 @@ def ver_personas(request):
     # renderizar_template=template.render({'personas':persona})
     # return HttpResponse(renderizar_template)  
     
+def index(request):
+    return render(request,'home/index.html')
+    
