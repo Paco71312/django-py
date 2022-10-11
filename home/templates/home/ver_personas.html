@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<!--Herencia de Html-->
+{% extends 'home/index.html' %}
+<!--Herencia de Html-->
+{% block title_pagina %}
+<title>Ver Personas</title>
+{% endblock title_pagina %}
+{% block h1_texto_header %} <h1>Ver Personas</h1>{% endblock h1_texto_header %}
+{% block index_contenido %}
     <p>Listado de Personas:</p>
     {% for persona in personas  %}
     <li>{{persona.nombre}} {{persona.apellido}} Edad:{{persona.edad}}</li>
     {% endfor %}
-</body>
-</html>
+
+    <a class="navbar-brand" href="{% url 'index' %}">Index</a>
+
+{% endblock index_contenido %}
+    

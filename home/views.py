@@ -12,8 +12,8 @@ import random
 
 from home.models import Humano
 def hola(request):
-    return HttpResponse("Buenas clase 41765!")
-
+    
+    return HttpResponse('<h1>Hola clase</h1>')
 def otra_vista(request):
     return HttpResponse("<h1>Escrito con html</h1>") 
 
