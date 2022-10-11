@@ -10,7 +10,7 @@ from django.shortcuts import render
 #clase 3
 import random
 
-from home.models import Persona
+from home.models import Humano
 def hola(request):
     return HttpResponse("Buenas clase 41765!")
 
@@ -62,7 +62,7 @@ def prueba_template(request):
     return HttpResponse(renderizar_template)
 # crear  la vista para el  modelo 
 def crear_persona(request,nombre,apellido):
-    persona=Persona(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_nacimiento=datetime.now())
+    persona=Humano(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_nacimiento=datetime.now())
     persona.save()
     return render(request,'home/crear_persona.html',{'persona':persona})
     # template=loader.get_template('crear_persona.html')
@@ -73,7 +73,7 @@ def crear_persona(request,nombre,apellido):
 
 def ver_personas(request):
     # con esto se tra todos lo aobjetos de persona que tiene el modelo 
-    persona=Persona.objects.all
+    persona=Humano.objects.all
     
     return render(request,'home/ver_personas.html',{'personas':persona})
     # template=loader.get_template('ver_personas.html')
