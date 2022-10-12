@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 #para importar tu template
 from django.template import Context,Template,loader
 #Clase 3
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #clase 3
 import random
 
@@ -61,13 +61,19 @@ def prueba_template(request):
     renderizar_template=template.render(mi_contexto)
     return HttpResponse(renderizar_template)
 # crear  la vista para el  modelo 
-def crear_persona(request,nombre,apellido):
-    persona=Humano(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_nacimiento=datetime.now())
-    persona.save()
-    return render(request,'home/crear_persona.html',{'persona':persona})
-    # template=loader.get_template('crear_persona.html')
-    # renderizar_template=template.render({'persona':persona})
-    # return HttpResponse(renderizar_template)
+def crear_persona(request):
+    #print(request.method) Para ver que metodo ocuapara
+    #print(request.GET) Para veri que querry te esta dando 
+    #print(request.POST) #Para ver que querry te esta dando  
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        apellido=request.POST.get('apellido')
+        persona=Humano(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_creacion=datetime.now())
+        persona.save()
+        return redirect('ver_personas') #nombre que esta en el archvio de url
+
+    return render(request,'home/crear_persona.html',{})
+   
 
 
 

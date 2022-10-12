@@ -13,6 +13,6 @@ urlpatterns = [
     #clase2 Agregando un parametro de nombre 
     path('prueba-template/', views.prueba_template),
     path('ver_personas/', views.ver_personas, name='ver_personas'),
-    path('crear_persona/<str:nombre>/<str:apellido>/', views.crear_persona), 
+    path('crear_persona/', views.crear_persona, name='crear_persona'), 
     
     ]

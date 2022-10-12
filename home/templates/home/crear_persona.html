@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p><h1>La persona se creo</h1></p>
-</body>
-</html>
+{% extends 'home/base.html' %}>
+{% block title_pagina %}
+<title>Crear Persona</title>
+{% endblock title_pagina %}
+
+{% block mi_contenido %}
+<!-- Get consultas la manda a la vista y POS para dar informaciom ocual ene la consulta que se hace-->
+<form action={% url 'crear_persona' %} method="POST">
+    {% csrf_token %}
+    <!--Una  manera-->
+    <input type="text"  name="nombre" placeholder='Nombre de la Persona'>
+    <!--Segunda manera-->
+    <p>
+        Apellido:
+        <input type="text" name="apellido" placeholder='Apellido de la Persona'>
+    </p>
+    {% comment %} <!--Tercera  manera-->
+    <label for="nombre2">Nombre</label>
+    <input type="text" name='nombre2' placeholder='Nombre2  de la Persona'>{% endcomment %}
+    {% comment %} <!--Mi primer  boton -->
+        <input type="submit" value="Crear Persona">
+    {% endcomment %}
+    
+    <button>Crear Persona</button>
+
+</form>
+
+{% endblock mi_contenido %}
