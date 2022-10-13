@@ -7,19 +7,9 @@
 <!-- Get consultas la manda a la vista y POS para dar informaciom ocual ene la consulta que se hace-->
 <form action={% url 'crear_persona' %} method="POST">
     {% csrf_token %}
-    <!--Una  manera-->
-    <input type="text"  name="nombre" placeholder='Nombre de la Persona'>
-    <!--Segunda manera-->
-    <p>
-        Apellido:
-        <input type="text" name="apellido" placeholder='Apellido de la Persona'>
-    </p>
-    {% comment %} <!--Tercera  manera-->
-    <label for="nombre2">Nombre</label>
-    <input type="text" name='nombre2' placeholder='Nombre2  de la Persona'>{% endcomment %}
-    {% comment %} <!--Mi primer  boton -->
-        <input type="submit" value="Crear Persona">
-    {% endcomment %}
+    <table>
+       {{formulario}} 
+    </table>
     
     <button>Crear Persona</button>
 

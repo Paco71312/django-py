@@ -6,3 +6,6 @@ class HumanoFormulario(forms.Form):
     edad=forms.IntegerField()
     fecha_creacion =forms.DateField(required=False)
     
+class BusquedaHumano(forms.Form):
+    nombre= forms.CharField(max_length=30)
+    

@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 #clase 3
 import random
 
+from home.forms import HumanoFormulario,BusquedaHumano
 from home.models import Humano
 def hola(request):
     
@@ -66,22 +67,32 @@ def crear_persona(request):
     #print(request.GET) Para veri que querry te esta dando 
     #print(request.POST) #Para ver que querry te esta dando  
     if request.method=='POST':
-        nombre=request.POST.get('nombre')
-        apellido=request.POST.get('apellido')
-        persona=Humano(nombre=nombre,apellido=apellido,edad=random.randrange(1,99),fecha_creacion=datetime.now())
-        persona.save()
+        formulario=HumanoFormulario(request.POST)
+        if formulario.is_valid():
+            data=formulario.cleaned_data #informacion limpia 
+            nombre=data['nombre']
+            apellido=data['apellido']
+            edad=data['edad']
+            fecha_creacion=data.get('fecha_creacion',datetime.now())
+            persona=Humano(nombre=nombre,apellido=apellido,edad=edad,fecha_creacion=fecha_creacion)
+            persona.save()
+            
+        
         return redirect('ver_personas') #nombre que esta en el archvio de url
-
-    return render(request,'home/crear_persona.html',{})
+    formulario=HumanoFormulario()
+    return render(request,'home/crear_persona.html',{'formulario':formulario})
    
 
 
 
 def ver_personas(request):
-    # con esto se tra todos lo aobjetos de persona que tiene el modelo 
-    persona=Humano.objects.all
-    
-    return render(request,'home/ver_personas.html',{'personas':persona})
+    nombre=request.GET.get('nombre',None)
+    if nombre:
+        persona= Humano.objects.filter(nombre__icontains=nombre)
+    else:
+        persona=Humano.objects.all()
+    formulario=BusquedaHumano()
+    return render(request,'home/ver_personas.html',{'personas':persona, 'formulario':formulario})
     # template=loader.get_template('ver_personas.html')
     # renderizar_template=template.render({'personas':persona})
     # return HttpResponse(renderizar_template)  
