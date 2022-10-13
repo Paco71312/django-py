@@ -14,9 +14,14 @@
         <button>Buscar</button>
     </form>
     <p>
+        {% if personas %}
         {% for persona in personas  %}
         <li>{{persona.nombre}} {{persona.apellido}} Edad:{{persona.edad}}</li>
         {% endfor %}
+        {% else %}
+        <p>No se encontraron resultados</p>
+        {% endif %}
+        
     </p>
     
 
