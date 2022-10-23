@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}>
+{% block title_pagina %}
+<title> Eliminar Mascota</title>
+{% endblock title_pagina %}
+
+{% block mi_contenido %}
+<!-- Get consultas la manda a la vista y POS para dar informaciom ocual ene la consulta que se hace-->
+<form action={% url 'eliminar_mascota' object.id%} method="POST">
+    {% csrf_token %}
+    <p>Comfirmar el borrado de la mascota {{object}}?</p>
+    <button>Eliminar Mascota</button>
+
+</form>
+
+{% endblock mi_contenido %}

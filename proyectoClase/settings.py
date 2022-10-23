@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # para aber que apps/modelso va a instalar
     'home',
+    'avanzado',
 ]
 
 MIDDLEWARE = [

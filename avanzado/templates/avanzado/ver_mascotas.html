@@ -1,0 +1,33 @@
+<!--Herencia de Html-->
+{% extends 'home/base.html' %}
+<!--Herencia de Html-->
+
+{% block h1_texto_header %} <h1>Ver Mascotas</h1>{% endblock h1_texto_header %}
+{% block mi_contenido %}
+    <a class="navbar-brand" href="{% url 'crear_mascota' %}">Crear Mascota</a>
+    <p>Listado de Mascotas:</p>
+    <form action={% url 'ver_mascotas' %} method="GET">
+        {% csrf_token %}
+        {{formulario}} 
+        <button>Buscar</button>
+    </form>
+    <p>
+        {% if mascotas %}
+        {% for mascota in mascotas  %}
+        <li>
+            {{mascota}}
+            <button>
+               <a class="navbar-brand" href="{% url 'editar_mascota' mascota.id %}">editar</a>
+            </button>
+            <a class="navbar-brand" href="{% url 'eliminar_mascota' mascota.id %}">Eliminar</a>
+        </li>
+        {% endfor %}
+        {% else %}
+        <p>No se encontraron resultados</p>
+        {% endif %}
+        
+    </p>
+    
+
+    
+{% endblock mi_contenido %}

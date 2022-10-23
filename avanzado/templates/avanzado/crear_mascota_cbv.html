@@ -1,0 +1,18 @@
+{% extends 'home/base.html' %}>
+{% block title_pagina %}
+<title>Crear Mascota</title>
+{% endblock title_pagina %}
+
+{% block mi_contenido %}
+<!-- Get consultas la manda a la vista y POS para dar informaciom ocual ene la consulta que se hace-->
+<form action={% url 'crear_mascota' %} method="POST">
+    {% csrf_token %}
+    <table>
+       {{form}} 
+    </table>
+    
+    <button>Crear Mascota</button>
+
+</form>
+
+{% endblock mi_contenido %}
