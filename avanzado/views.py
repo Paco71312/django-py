@@ -5,6 +5,8 @@ from home.views import ver_personas
 
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin # para cvb
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -12,7 +14,7 @@ def ver_mascotas(request):
     masccotas=Mascota.objects.all()
     
     return render(request,'avanzado/ver_mascotas.html',{'mascotas':masccotas})
-
+@login_required
 def crear_mascotas(request):
     #identificar si viene por post 
     if request.method=='POST':
@@ -61,12 +63,12 @@ class CrearMascota(CreateView): # se crea un formulario por defualt
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/crear_mascota_cbv.html'
     fields= ['nombre','tipo','edad','fecha_nacimiento']
-class EditarMascota(UpdateView):
+class EditarMascota(LoginRequiredMixin, UpdateView):
     model=Mascota
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/editar_mascota_cbv.html'
     fields= ['nombre','tipo','edad','fecha_nacimiento']
-class EliminarMascota(DeleteView):
+class EliminarMascota(LoginRequiredMixin, DeleteView):
     model= Mascota
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/eliminar_mascota_cbv.html'

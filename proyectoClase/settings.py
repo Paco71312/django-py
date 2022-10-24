@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # para aber que apps/modelso va a instalar
     'home',
     'avanzado',
+    'accounts',
 ]
 
 MIDDLEWARE = [
