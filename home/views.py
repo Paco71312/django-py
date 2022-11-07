@@ -86,9 +86,6 @@ def crear_persona(request):
         return redirect('ver_personas') #nombre que esta en el archvio de url
     formulario=HumanoFormulario()
     return render(request,'home/crear_persona.html',{'formulario':formulario})
-   
-
-
 
 def ver_personas(request):
     nombre=request.GET.get('nombre',None)

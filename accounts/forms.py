@@ -1,6 +1,6 @@
 #creacion de formularios para registrar 
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm # basado en user creation form 
 from django import forms
 class MiFormularioDeCreacion(UserCreationForm):
     username= forms.CharField(label= 'Usuario' ,max_length=20)

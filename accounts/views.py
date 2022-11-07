@@ -16,10 +16,11 @@ def mi_login(request):
         formulario=AuthenticationForm()
     return render(request, 'accounts/login.html',{'formulario':formulario})
 
+#  Por meto de Django directo 
 # def registrar(request):
 #     if request.method== 'POST':
 #         formulario=UserCreationForm(request.POST)
-#         if formulario.is_valid:
+#         if formulario.is_valid():
 #             #creacion de usuario
 #             formulario.save() #nos permite crear un usuario nuevo
 #             return redirect('index')
@@ -30,7 +31,7 @@ def mi_login(request):
 def registrar(request):
     if request.method== 'POST':
         formulario=MiFormularioDeCreacion(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             #creacion de usuario
             formulario.save() #nos permite crear un usuario nuevo
             return redirect('index')
