@@ -1,9 +1,11 @@
+from multiprocessing import context
+from re import template
 from django.shortcuts import redirect, render
 from avanzado.models import Mascota
 from avanzado.forms import BusquedaMascota, MascotaFormulario
 from home.views import ver_personas 
 
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin # para cvb
 from django.contrib.auth.decorators import login_required
@@ -11,9 +13,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def ver_mascotas(request):
-    masccotas=Mascota.objects.all()
+    mascotas=Mascota.objects.all()
     
-    return render(request,'avanzado/ver_mascotas.html',{'mascotas':masccotas})
+    return render(request,'avanzado/ver_mascotas.html',{'mascotas':mascotas})
 @login_required
 def crear_mascotas(request):
     #identificar si viene por post 
@@ -21,7 +23,7 @@ def crear_mascotas(request):
         formulario=MascotaFormulario(request.POST)
         if formulario.is_valid():
             datos= formulario.cleaned_data
-            mascota=Mascota(nombre=datos['nombre'],tipo=datos['tipo'],edad=datos['edad'],fecha_nacimiento=datos['fecha_nacimiento'])
+            mascota=Mascota(nombre=datos['nombre'],tipo=datos['tipo'],edad=datos['edad'],fecha_nacimiento=datos['fecha_nacimiento'],descripcion=['descripcion'])
             mascota.save()
             return redirect('ver_mascotas')
         else:
@@ -58,20 +60,34 @@ def eliminar_mascota(request,id):
 class ListaMascota(ListView): #ver mascota
     model=Mascota
     template_name='avanzado/ver_mascotas_cbv.html'
+    
+    def get_queryset(self):
+        nombre=self.request.GET.get('nombre','')
+        if nombre:
+            object_list= self.model.objects.filter(nombre__icontains=nombre)
+        else:
+            object_list= self.model.objects.all()
+        return object_list
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["formulario"]=BusquedaMascota()
+        return context
+    
 class CrearMascota(CreateView): # se crea un formulario por defualt 
     model=Mascota
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/crear_mascota_cbv.html'
-    fields= ['nombre','tipo','edad','fecha_nacimiento']
+    fields= ['nombre','tipo','edad','fecha_nacimiento','descripcion']
 class EditarMascota(LoginRequiredMixin, UpdateView):
     model=Mascota
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/editar_mascota_cbv.html'
-    fields= ['nombre','tipo','edad','fecha_nacimiento']
+    fields= ['nombre','tipo','edad','fecha_nacimiento','descripcion']
 class EliminarMascota(LoginRequiredMixin, DeleteView):
     model= Mascota
     success_url= '/avanzado/mascotas/'
     template_name='avanzado/eliminar_mascota_cbv.html'
 
-#class VerMascota():
-
+class VerMascota(DetailView):
+    model= Mascota
+    template_name='avanzado/ver_mascota.html'

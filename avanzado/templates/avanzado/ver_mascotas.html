@@ -16,11 +16,11 @@
         {% for mascota in mascotas  %}
         <li>
             {{mascota}}
-            <butquin>
-               <a class="navbar-brand" href="{% url 'editar_mascota' mascota.id %}">editar</a> {% comment %}
+            
+            <a class="navbar-brand" href="{% url 'editar_mascota' mascota.id %}">editar</a> {% comment %}
                 quin se le pasa ele id para que sepa que id debe de tomar 
             {% endcomment %}
-            </butquin se le pasa ele id para que sepa que id debe de tomar ton>
+            
             <a class="navbar-brand" href="{% url 'eliminar_mascota' mascota.id %}">Eliminar</a>
         </li>
         {% endfor %}

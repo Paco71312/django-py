@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login
 from django.urls import is_valid_path
-from accounts.forms import EditarPerfilFormulario, MiFormularioDeCreacion
+from accounts.forms import EditarPerfilFormulario, MiCambioDePassword, MiFormularioDeCreacion
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -72,4 +72,4 @@ def editar_perfil(request):
 class CambiarPass(LoginRequiredMixin, PasswordChangeView):
     template_name='accounts/cambiar_pass.html'
     success_url='/accounts/perfil'
-    
+    form_class=MiCambioDePassword

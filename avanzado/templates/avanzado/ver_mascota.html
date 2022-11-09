@@ -1,0 +1,18 @@
+<!--Herencia de Html-->
+{% extends 'home/base.html' %}
+<!--Herencia de Html-->
+
+{% block h1_texto_header %} <h1>Mascota</h1>{% endblock h1_texto_header %}
+{% block mi_contenido %}
+  
+    <p>
+        <li>Nombre:{{mascota.nombre}} </li>
+        <li>Tipo:{{mascota.tipo}} </li>
+        <li>Edad:{{mascota.edad}} </li>
+        <li>Fecha de Nacimiento:{{mascota.fecha_nacimiento}} </li>
+        <li>Descripcion:{{mascota.descripcion | safe}} </li>
+    </p>
+    
+
+    
+{% endblock mi_contenido %}

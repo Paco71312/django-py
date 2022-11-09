@@ -7,7 +7,6 @@
     <a class="navbar-brand" href="{% url 'crear_mascota' %}">Crear Mascota</a>
     <p>Listado de Mascotas:</p>
     <form action={% url 'ver_mascotas' %} method="GET">
-        {% csrf_token %}
         {{formulario}} 
         <button>Buscar</button>
     </form>
@@ -15,7 +14,8 @@
         {% if object_list %}
         {% for mascota in object_list  %}
         <li>
-            {{mascota}}
+            {% comment %}{{mascota}}{% endcomment %}
+            <a class="navbar-brand" href="{% url 'ver_mascota' mascota.id %}">{{mascota}}</a>
             <button>
                <a class="navbar-brand" href="{% url 'editar_mascota' mascota.id %}">editar</a>
             </button>
